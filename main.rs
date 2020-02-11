@@ -1,6 +1,5 @@
 mod loops;
 
 fn main() {
-    loops::loops();
-    loops::ifloop();
+    println!("Hello World.");
 }
