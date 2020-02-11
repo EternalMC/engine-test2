@@ -14,8 +14,11 @@ fn main() {
     let mut arc_ball = ArcBall::new(eye, at);
     let mut use_arc_ball = true;
 
-    let mut window = Window::new("Kiss3d: camera");
+    let mut window = Window::new("Kiss3d: camera with Cube");
     window.set_light(Light::StickToCamera);
+        
+    let mut cube      = window.add_cube(1.0, 1.0, 1.0);
+        cube.set_color(1.0, 0.0, 0.0);
 
     while !window.should_close() {
         // rotate the arc-ball camera.
