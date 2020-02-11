@@ -19,6 +19,8 @@ fn main() {
         
     let mut cube      = window.add_cube(1.0, 1.0, 1.0);
         cube.set_color(1.0, 0.0, 0.0);
+    
+        let rot = UnitQuaternion::from_axis_angle(&Vector3::y_axis(), 0.014);
 
     while !window.should_close() {
         // rotate the arc-ball camera.
