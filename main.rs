@@ -7,8 +7,13 @@ use kiss3d::light::Light;
 use kiss3d::window::Window;
 use na::{Point3, Vector3, UnitQuaternion};
 
+mod block;
 mod config;
+mod core;
+mod input;
 mod render;
+mod texture;
+mod sim;
 
 fn main() {
     let eye = Point3::new(10.0f32, 10.0, 10.0);
@@ -66,4 +71,41 @@ fn main() {
             window.render_with_camera(&mut first_person);
         }
     }
+}
+#[macro_use]
+extern crate gfx;
+#[macro_use]
+extern crate serde_derive;
+
+const CHUNK_SIZE: usize = 32;
+
+// TODO: refactor ?
+type ColorFormat = gfx::format::Srgba8;
+type DepthFormat = gfx::format::DepthStencil;
+
+gfx_defines! {
+    vertex Vertex {
+        pos: [f32; 4] = "a_Pos",
+        uv: [f32; 2] = "a_Uv",
+    }
+
+    constant Transform {
+        view_proj: [[f32; 4]; 4] = "u_ViewProj",
+        model: [[f32; 4]; 4] = "u_Model",
+    }
+
+    pipeline pipe {
+        vbuf: gfx::VertexBuffer<Vertex> = (),
+        transform: gfx::ConstantBuffer<Transform> = "Transform",
+        image: gfx::TextureSampler<[f32; 4]> = "t_Image",
+        out_color: gfx::RenderTarget<ColorFormat> = "Target0",
+        out_depth: gfx::DepthTarget<DepthFormat> =
+            gfx::preset::depth::LESS_EQUAL_WRITE,
+    }
+}
+
+
+
+fn main() {
+    threads::input::start();
 }
