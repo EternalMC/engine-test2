@@ -10,10 +10,11 @@ edition = "2018"
 [dependencies]
 kiss3d = "0.22.1"
 nalgebra = "0.19.0"
+toml = "^0.4"
 # TODO
-# toml = "^0.4"
 # rand = "0.7.3"
 # rusttype = "0.8.2"
+# lazy_static = "1.4.0"
 # texture_packer = "^0.16"
 # kiss3d_conrod = "0.64.0"
 # serde_derive = "1.0.104"
